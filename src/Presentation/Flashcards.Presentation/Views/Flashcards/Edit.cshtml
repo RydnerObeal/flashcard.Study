@@ -1,0 +1,42 @@
+@model Flashcards.Infrastructure.Entities.Flashcard
+@{
+    ViewData["Title"] = "Edit Flashcard";
+    var deckId = Model.DeckId;
+}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <h5 class="mb-0">?? Edit Flashcard</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="DeckId" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Front" class="form-control" placeholder="Front" />
+                        <label asp-for="Front">?? Front</label>
+                        <span asp-validation-for="Front" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Back" class="form-control" placeholder="Back" />
+                        <label asp-for="Back">?? Back</label>
+                        <span asp-validation-for="Back" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">?? Save</button>
+                        <a class="btn btn-outline-secondary" asp-action="Index" asp-route-deckId="@deckId">? Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
