@@ -25,7 +25,6 @@ public class AccountController(SignInManager<IdentityUser> signInManager, UserMa
         if (!ModelState.IsValid)
             return View(model);
 
-        // Try to find by email, then sign in using the actual username
         var user = await _userManager.FindByEmailAsync(model.Email);
         var userName = user?.UserName ?? model.Email;
         var result = await _signInManager.PasswordSignInAsync(userName, model.Password, model.RememberMe, lockoutOnFailure: true);

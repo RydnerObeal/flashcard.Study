@@ -38,6 +38,14 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    
+    var invalidResults = db.StudyResults.Where(r => string.IsNullOrEmpty(r.UserId)).ToList();
+    if (invalidResults.Any())
+    {
+        db.StudyResults.RemoveRange(invalidResults);
+        db.SaveChanges();
+    }
+    
     if (!db.Decks.Any())
     {
         var decks = new List<Deck>

@@ -22,6 +22,11 @@ public class RegisterModel(UserManager<IdentityUser> userManager, SignInManager<
     public class InputModel
     {
         [Required]
+        [StringLength(50, MinimumLength = 3)]
+        [RegularExpression(@"^[a-zA-Z0-9_-]+$", ErrorMessage = "Username can only contain letters, numbers, underscores, and hyphens.")]
+        public string Username { get; set; } = string.Empty;
+
+        [Required]
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
@@ -48,7 +53,7 @@ public class RegisterModel(UserManager<IdentityUser> userManager, SignInManager<
             return Page();
         }
 
-        var user = new IdentityUser { UserName = Input.Email, Email = Input.Email, EmailConfirmed = true };
+        var user = new IdentityUser { UserName = Input.Username, Email = Input.Email, EmailConfirmed = true };
         var result = await _userManager.CreateAsync(user, Input.Password);
         if (result.Succeeded)
         {

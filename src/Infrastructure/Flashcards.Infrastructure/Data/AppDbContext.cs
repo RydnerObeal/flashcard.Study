@@ -27,6 +27,12 @@ public class AppDbContext : IdentityDbContext<IdentityUser>
             .HasForeignKey(sr => sr.DeckId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<StudyResult>()
+            .HasOne(sr => sr.User!)
+            .WithMany()
+            .HasForeignKey(sr => sr.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
+
         base.OnModelCreating(modelBuilder);
     }
 }

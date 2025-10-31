@@ -19,18 +19,23 @@
         <thead>
           <tr>
             <th>Date</th>
-            <th>Player</th>
             <th>Mode</th>
             <th>Score</th>
           </tr>
         </thead>
         <tbody>
+        @if (!Model.Any())
+        {
+          <tr>
+            <td colspan="3" class="text-center text-muted">No scores yet. Start a study session to record your first score!</td>
+          </tr>
+        }
         @foreach (var r in Model)
         {
+          if (string.IsNullOrEmpty(r.UserId)) continue;
           var pct = r.Total > 0 ? (int)Math.Round(100.0 * r.Correct / r.Total) : 0;
           <tr>
             <td>@r.PlayedAt.ToLocalTime().ToString("g")</td>
-            <td>@r.PlayerName</td>
             <td>@r.Mode</td>
             <td>
               <span class="badge @(pct>=70?"text-bg-success":"text-bg-warning")">@r.Correct/@r.Total (@pct%)</span>

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace Flashcards.Infrastructure.Entities;
 
@@ -12,8 +13,8 @@ public class StudyResult
     public Deck? Deck { get; set; }
 
     [Required]
-    [StringLength(50)]
-    public string PlayerName { get; set; } = "Guest";
+    public string UserId { get; set; } = string.Empty;
+    public IdentityUser? User { get; set; }
 
     [Required]
     [StringLength(20)]
