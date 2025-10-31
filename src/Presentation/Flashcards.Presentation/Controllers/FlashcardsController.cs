@@ -1,9 +1,11 @@
 using Flashcards.Infrastructure.Entities;
 using Flashcards.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flashcards.Presentation.Controllers;
 
+[Authorize]
 public class FlashcardsController(IFlashcardService cardService, IDeckService deckService) : Controller
 {
     private readonly IFlashcardService _cardService = cardService;

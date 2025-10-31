@@ -1,9 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Flashcards.Presentation.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Flashcards.Presentation.Controllers;
 
+[AllowAnonymous]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
