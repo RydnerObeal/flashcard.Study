@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Flashcards.Infrastructure.Entities.Deck>
+@{
+    ViewData["Title"] = "Decks";
+}
+<div class="d-flex justify-content-between align-items-center mt-3">
+    <h2 class="mb-0">🗂️ Decks</h2>
+    <a class="btn btn-primary" asp-controller="Decks" asp-action="Create">
+        ➕ Create Deck
+    </a>
+</div>
+
+<table class="table table-striped mt-3 align-middle">
+    <thead class="table-primary">
+        <tr>
+            <th>📘 Name</th>
+            <th>🃏 Cards</th>
+            <th>⚙️ Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var d in Model)
+        {
+            <tr>
+                <td>@d.Name</td>
+                <td>@(d.Flashcards?.Count ?? 0)</td>
+                <td>
+                    <a asp-controller="Flashcards" asp-action="Index" asp-route-deckId="@d.Id">📝 Cards</a> |
+                    <a asp-controller="Study" asp-action="Review" asp-route-deckId="@d.Id">📖 Review</a> |
+                    <a asp-controller="Study" asp-action="Quiz" asp-route-deckId="@d.Id">❓ Quiz</a> |
+                    <a asp-controller="Study" asp-action="Scores" asp-route-deckId="@d.Id">📊 Scores</a> |
+                    <a asp-controller="Decks" asp-action="Edit" asp-route-id="@d.Id">✏️ Edit</a> |
+                    <form asp-controller="Decks" asp-action="Delete" asp-route-id="@d.Id" method="post" style="display:inline">
+                        <button type="submit" class="btn btn-link p-0 text-danger">🗑️ Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

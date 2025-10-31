@@ -1,0 +1,34 @@
+﻿@model Flashcards.Infrastructure.Entities.Deck
+@{
+    ViewData["Title"] = "Edit Deck";
+}
+<div class="row justify-content-center mt-4">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white d-flex align-items-center">
+                <h5 class="mb-0">✏️ Edit Deck</h5>
+            </div>
+            <div class="card-body">
+                <form asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Name" class="form-control" placeholder="Deck name" required />
+                        <label asp-for="Name">📘 Deck Name</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">💾 Save</button>
+                        <a asp-action="Index" class="btn btn-outline-secondary">❌ Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
